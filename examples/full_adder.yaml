@@ -1,0 +1,52 @@
+--- Implementation of 1-Bit Full Adder showing in, out, wire, modules
+
+meta:
+  - name: 1-Bit Full Adder
+  - mid: 0
+
+in:
+  - name: a
+  - name: b
+  - name: cin
+
+out:
+  - name: s
+  - name: cout
+
+modules:
+  - name: xor
+    in: 
+    - 1: a
+    - 2: b
+    - 3: cin
+    out:
+    - 1: s
+
+  - name: and
+    in:
+      - 1: a
+      - 2: b
+    out:
+      - 1: wire1
+
+  - name: and
+    in:
+      - 1: a
+      - 2: cin
+    out:
+      - 1: wire2
+
+  - name: and
+    in:
+      - 1: b
+      - 2: cin
+    out:
+      - 1: wire3
+
+  - name: or
+    in:
+      - 1: wire1
+      - 2: wire2
+      - 3: wire3
+    out:
+      - 1: cout

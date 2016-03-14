@@ -1,0 +1,39 @@
+--- Implementation of 2-Bit Adder using the full_adder module
+
+meta:
+  - name: 2-Bit Adder
+  - mid: 1
+
+req:
+  - mid: 0
+  - name: one-bit-adder
+  - location: 2
+
+in:
+  - name: a
+    width: 2
+  - name: b
+    width: 2
+
+out:
+  - name: out
+    width: 3
+
+modules:
+  - name: one-bit-adder
+    in: 
+      - a: a.0
+      - b: b.0
+      - cin: 0
+    out:
+      - s: out.0
+      - cout: temp1
+
+  - name: one-bit-adder
+    in:
+      - a: a.1
+      - b: b.1
+      - cin: temp1
+    out:
+      - s: out.1
+      - cout: out.2

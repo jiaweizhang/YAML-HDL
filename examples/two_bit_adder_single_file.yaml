@@ -1,0 +1,91 @@
+--- Implementation of 2-bit-adder in a single file
+
+module:
+  meta:
+    - name: 2-Bit Adder in One File
+    - mid: 2
+
+  req:
+    - mid: 0
+    - name: one-bit-adder
+
+  in:
+    - name: a
+      width: 2
+    - name: b
+      width: 2
+
+  out:
+    - name: out
+      width: 3
+
+  modules:
+    - name: one-bit-adder
+      in: 
+        - a: a.0
+        - b: b.0
+        - cin: 0
+      out:
+        - s: out.0
+        - cout: temp1
+
+    - name: one-bit-adder
+      in:
+        - a: a.1
+        - b: b.1
+        - cin: temp1
+      out:
+        - s: out.1
+        - cout: out.2
+
+module:
+  meta:
+    - name: 1-Bit Full Adder
+    - mid: 0
+
+  in:
+    - name: a
+    - name: b
+    - name: cin
+
+  out:
+    - name: s
+    - name: cout
+
+  modules:
+    - name: xor
+      in: 
+      - 1: a
+      - 2: b
+      - 3: cin
+      out:
+      - 1: s
+
+    - name: and
+      in:
+        - 1: a
+        - 2: b
+      out:
+        - 1: wire1
+
+    - name: and
+      in:
+        - 1: a
+        - 2: cin
+      out:
+        - 1: wire2
+
+    - name: and
+      in:
+        - 1: b
+        - 2: cin
+      out:
+        - 1: wire3
+
+    - name: or
+      in:
+        - 1: wire1
+        - 2: wire2
+        - 3: wire3
+      out:
+        - 1: cout
